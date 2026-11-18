@@ -1,0 +1,2 @@
+import { initials } from '@/lib/utils';import { createClient } from '@/lib/supabase/server';
+export async function Avatar({name,path,size=34}:{name?:string|null;path?:string|null;size?:number}){let url:string|undefined;if(path){const supabase=await createClient();const {data}=await supabase.storage.from('avatars').createSignedUrl(path,3600);url=data?.signedUrl}return <span className="avatar" style={{width:size,height:size,fontSize:size>50?20:11}}>{url?<img src={url} alt={name||'Student'}/>:initials(name)}</span>}

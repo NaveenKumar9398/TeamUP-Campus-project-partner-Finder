@@ -1,0 +1,2 @@
+import Link from 'next/link';import { AuthShell } from '@/components/auth-shell';import { signOut } from '@/actions/auth';
+export default function CampusAccess(){return <AuthShell><h1>Campus access pending</h1><p>TeamUp is reserved for verified SRMIST students. An administrator must set the approved student email domain before access can be enabled.</p><div style={{display:'flex',gap:10}}><Link href="/" className="btn btn-outline">Home</Link><form action={signOut}><button className="btn btn-primary">Sign out</button></form></div></AuthShell>}

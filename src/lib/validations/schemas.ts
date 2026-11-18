@@ -1,0 +1,5 @@
+import { z } from 'zod';
+const tags = z.array(z.string().trim().min(1).max(40)).max(20);
+export const projectSchema = z.object({title:z.string().trim().min(5).max(100),description:z.string().trim().min(30).max(5000),category:z.string().trim().min(2).max(60),project_type:z.enum(['PBL','Minor','Major','Hackathon','Research','Technical Competition','Other']),required_skills:tags,required_roles:tags,max_team_size:z.number().int().min(2).max(20),duration:z.string().trim().max(80),deadline:z.iso.date().nullable(),status:z.enum(['Open','In Progress','Completed','Closed'])});
+export const profileSchema = z.object({full_name:z.string().trim().min(2).max(100),department:z.string().trim().min(2).max(100),academic_year:z.number().int().min(1).max(6),section:z.string().trim().max(20),bio:z.string().trim().max(1000),skills:tags,interests:tags,project_preferences:tags,availability:z.enum(['Available','Open to offers','Unavailable']),is_discoverable:z.boolean(),github_url:z.union([z.url(),z.literal('')]),linkedin_url:z.union([z.url(),z.literal('')])});
+export const requestSchema = z.object({project_id:z.uuid(),message:z.string().trim().min(5).max(500)});

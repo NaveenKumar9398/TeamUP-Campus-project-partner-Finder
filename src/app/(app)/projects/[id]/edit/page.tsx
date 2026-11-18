@@ -1,0 +1,2 @@
+import { notFound } from 'next/navigation';import { requireUser } from '@/lib/auth';import { ProjectForm } from '@/components/project-form';
+export default async function EditProject({params,searchParams}:{params:Promise<{id:string}>;searchParams:Promise<{error?:string}>}){const {id}=await params;const {error}=await searchParams;const {supabase,user}=await requireUser();const {data}=await supabase.from('projects').select('*').eq('id',id).single();if(!data||data.owner_id!==user.id)notFound();return <ProjectForm project={data} error={error}/>}
